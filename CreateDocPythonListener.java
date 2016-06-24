@@ -7,6 +7,9 @@ public class CreateDocPythonListener extends Python3BaseListener{
     String lastComment = "";
     String parametersDef = "";
     String argsListClass = "";
+    String authorComment = "";
+    String dateComment = "";
+    String versionComment = "";
 
     ArrayList<Funcao> funcaoList = new ArrayList<>();
     ArrayList<Classe> classeList = new ArrayList<>();
@@ -20,6 +23,18 @@ public class CreateDocPythonListener extends Python3BaseListener{
       return this.funcaoList;
     }
 
+    public String getAuthorComment(){
+      return this.authorComment;
+    }
+
+    public String getDateComment(){
+      return this.dateComment;
+    }
+
+    public String getVersionComment(){
+      return this.versionComment;
+    }
+
     @Override
     public void enterFuncdef(@NotNull Python3Parser.FuncdefContext ctx) {
       Funcao f = new Funcao();
@@ -31,10 +46,6 @@ public class CreateDocPythonListener extends Python3BaseListener{
       classeList.get(contClass -1).getFuncaoList().add(f);
 
       contFunc++;
-      // System.out.println("Parameters def" + f.getParameters());
-      // System.out.println("FuncDef:" + f.getName() );
-      // System.out.println("Descrição: " + f.getDescription());
-      // System.out.println("Classe pai: " + f.getClasse().getName());
       lastComment="";
     }
 
@@ -46,8 +57,6 @@ public class CreateDocPythonListener extends Python3BaseListener{
       c.setId(contClass);
       classeList.add(c);
       contClass++;
-      // System.out.println("Class:" + c.getName());
-      // System.out.println("Comentario:" + c.getDescription());
       lastComment="";
     }
 
@@ -72,6 +81,27 @@ public class CreateDocPythonListener extends Python3BaseListener{
       String content = ctx.COMMENT().getText();
       String contentWithoutComm = content.replace("#", "");
       lastComment += contentWithoutComm + " ";
+    }
+
+    @Override
+    public void enterCommentauthordef(@NotNull Python3Parser.CommentauthordefContext ctx){
+      String content = ctx.COMMENT_AUTHOR().getText();
+      String[] parts = content.split("@autor:");
+      authorComment = parts[1];
+    }
+
+    @Override
+    public void enterCommentdatedef(@NotNull Python3Parser.CommentdatedefContext ctx){
+      String content = ctx.COMMENT_DATE().getText();
+      String[] parts = content.split("@date:");
+      dateComment = parts[1];
+    }
+
+    @Override
+    public void enterCommentversiondef(@NotNull Python3Parser.CommentversiondefContext ctx){
+      String content = ctx.COMMENT_VERSION().getText();
+      String[] parts = content.split("@version:");
+      versionComment = parts[1];
     }
 
     @Override

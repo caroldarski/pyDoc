@@ -767,6 +767,36 @@ public interface Python3Listener extends ParseTreeListener {
 	 */
 	void exitCommentdef(Python3Parser.CommentdefContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Python3Parser#commentauthordef}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommentauthordef(Python3Parser.CommentauthordefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Python3Parser#commentauthordef}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommentauthordef(Python3Parser.CommentauthordefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Python3Parser#commentdatedef}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommentdatedef(Python3Parser.CommentdatedefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Python3Parser#commentdatedef}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommentdatedef(Python3Parser.CommentdatedefContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Python3Parser#commentversiondef}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommentversiondef(Python3Parser.CommentversiondefContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Python3Parser#commentversiondef}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommentversiondef(Python3Parser.CommentversiondefContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Python3Parser#arglist}.
 	 * @param ctx the parse tree
 	 */

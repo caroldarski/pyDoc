@@ -214,7 +214,10 @@ stmt
 
 /// comment_stmt: #
 comment_stmt
- : commentdef NEWLINE
+ : commentauthordef NEWLINE
+ | commentdatedef NEWLINE
+ | commentversiondef NEWLINE
+ | commentdef NEWLINE
  ;
 
 
@@ -632,6 +635,21 @@ commentdef
  : COMMENT
  ;
 
+/// commentauthordef: COMMENT_AUTHOR
+commentauthordef
+  : COMMENT_AUTHOR
+  ;
+
+/// commentdatedef: COMMENT_DATE
+commentdatedef
+  : COMMENT_DATE
+  ;
+
+//// commentversiondef: COMMENT_VERSION
+commentversiondef
+  : COMMENT_VERSION
+  ;
+
 /// arglist: (argument ',')* (argument [',']
 ///                          |'*' test (',' argument)* [',' '**' test]
 ///                          |'**' test)
@@ -700,6 +718,9 @@ integer
  * lexer rules
  */
 
+COMMENT_AUTHOR : [ \t]* '# @autor:' ~[\r\n]*;
+COMMENT_DATE : [ \t]* '# @date:' ~[\r\n]*;
+COMMENT_VERSION : [ \t]* '# @version:' ~[\r\n]*;
 COMMENT : [ \t]* '#' ~[\r\n]*;
 DEF : 'def';
 RETURN : 'return';

@@ -8,6 +8,9 @@ public class Arquivo{
   private String name;
   private List<Classe> classesList;
 
+  public Arquivo(){
+    this.classesList = new ArrayList<Classe>();
+  }
   public void setAuthor(String author){
     this.author = author;
   }

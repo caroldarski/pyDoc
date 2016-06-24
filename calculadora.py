@@ -1,78 +1,25 @@
 # calculadora.py
-# Calcalcul
+# @autor: Carolina Darski
+# @date: 05/05/2016
+# @version: 1.0
+# Esta classe representa uma calculadora.
 class Calculadora(object):
-    #Teste
     def __init__(self, a, b):
         self.a = a
         self.b = b
 
-    #SOMA SOMA SOMA SOMAAA
+    # Realiza operação de soma através do método.
     def soma(self):
         return self.a + self.b
 
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtrai
-    #subtraifim
+    # Realiza operação de subtração através do método.
     def subtrai(self):
         return self.a - self.b
 
-	def multiplica(self):
-		return self.a * self.b
+    # Realiza operação de multiplicação através do método.
+    def multiplica(self):
+        return self.a * self.b
 
-
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #divide
-    #dividefim
+    # Realiza operação de divisão através do método
     def divide(self):
         return self.a / self.b
-
-# calculadora.pyaaa
-# Calcalculaaa
-class Test(Calculadora):
-	def __init__(self, a):
-		self.a = a
