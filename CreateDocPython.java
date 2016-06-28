@@ -10,6 +10,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
+import java.io.File;
+import java.io.FileReader;
 
 public class CreateDocPython {
 		static List<Arquivo> arquivosList = new ArrayList<Arquivo>();
@@ -35,6 +37,7 @@ public class CreateDocPython {
 			buffWrite.println("<title>pyHTMLDoc - Calculadora.py</title>");
 			buffWrite.println("</head>");
 			buffWrite.println("<body>");
+			buffWrite.println("<div style=\"text-align: center;\">");
 
 			for (int x=0; x < arquivos.size(); x++){
 				for (int i=0; i<arquivos.get(x).getClassesList().size(); i++){
@@ -56,7 +59,10 @@ public class CreateDocPython {
 
 				for (int i=0; i<arquivos.get(x).getClassesList().size(); i++){
 					buffWrite.println("<div id=\"CL"+ arquivos.get(x).getClassesList().get(i).getName() +"\"> <h3 style=\"color: rgb(34, 34, 34); font-family: Arial, Verdana, sans-serif;\">" + arquivos.get(x).getClassesList().get(i).getName());
-					buffWrite.println("(<a href=\"#CL" + arquivos.get(x).getClassesList().get(i).getMaster() + "\">"+ arquivos.get(x).getClassesList().get(i).getMaster() + "</a>)</h3></br>");
+					if (arquivos.get(x).getClassesList().get(i).getMaster() != null)
+						buffWrite.println("(<a href=\"#CL" + arquivos.get(x).getClassesList().get(i).getMaster() + "\">"+ arquivos.get(x).getClassesList().get(i).getMaster() + "</a>)</h3></br>");
+					else
+						buffWrite.println("()</h3></br>");
 
 					buffWrite.println("<spam style=\"color: rgb(34, 34, 34); font-family: Arial, Verdana, sans-serif; font-size: 12px;\">" + arquivos.get(x).getClassesList().get(i).getDescription() + "</spam></div></br>");
 					buffWrite.println("<h3 style=\"color: rgb(34, 34, 34); font-family: Arial, Verdana, sans-serif;\">M&eacute;todos:</h3>");
@@ -68,23 +74,41 @@ public class CreateDocPython {
 
 
 			}
+			buffWrite.println("</div>");
 			buffWrite.println("</body>");
 
 			buffWrite.close();
 
 		}
     public static void main(String[] args) throws Exception {
-      String inputFile = null;
-			for (int i=0; i < args.length; i++){
-				inputFile = args[i];
 
-				InputStream file = new FileInputStream(inputFile);
+			if (args[0].equals("dir")){
+				System.out.println(args[1]);
+				File file = new File(args[1]);
 
-				ANTLRInputStream source = new ANTLRInputStream(file);
-				System.out.println(source.toString());
-				listMethodNames(source, inputFile);
+				File[] files = file.listFiles();
+
+				for (int i = 0; i < files.length; i++) {
+						System.out.println(files[i].getName());
+						createLoopFile(files[i].getName());
+				}
+			}
+			else{
+				for (int i=0; i < args.length; i++){
+					createLoopFile(args[i]);
+				}
 			}
 			createDoc(arquivosList);
 
+		}
+
+		private static void createLoopFile(String args) throws Exception {
+			String inputFile = args;
+
+			InputStream file = new FileInputStream(inputFile);
+
+			ANTLRInputStream source = new ANTLRInputStream(file);
+			System.out.println(source.toString());
+			listMethodNames(source, inputFile);
 		}
 }
